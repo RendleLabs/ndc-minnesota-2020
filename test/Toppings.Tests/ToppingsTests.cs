@@ -19,7 +19,7 @@ namespace Toppings.Tests
             var client = _factory.CreateToppingsClient();
 
             var response = await client.GetAvailableAsync(new AvailableRequest());
-            Assert.NotEmpty(response.Toppings);
+            Assert.Equal(2, response.Toppings.Count);
         }
     }
 }
