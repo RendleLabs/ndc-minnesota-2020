@@ -28,7 +28,8 @@ namespace Frontend
 
             services.AddGrpcClient<Toppings.ToppingsClient>((provider, options) =>
             {
-                options.Address = new Uri("https://localhost:5003");
+                var config = provider.GetRequiredService<IConfiguration>();
+                options.Address = config.GetServiceUri("Toppings", "https");
             });
         }
 
