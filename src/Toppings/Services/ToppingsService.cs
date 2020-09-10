@@ -47,5 +47,15 @@ namespace Toppings
 
             return response;
         }
+
+        public override async Task<DecrementStockResponse> DecrementStock(DecrementStockRequest request, ServerCallContext context)
+        {
+            foreach (var id in request.ToppingIds)
+            {
+                await _data.DecrementStockAsync(id);
+            }
+
+            return new DecrementStockResponse();
+        }
     }
 }

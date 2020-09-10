@@ -7,8 +7,16 @@ package toppings;
 service Toppings {
 
     rpc GetAvailable(AvailableRequest) returns (AvailableResponse);
+    rpc DecrementStock(DecrementStockRequest) returns (DecrementStockResponse);
 
 }
+
+message DecrementStockRequest {
+    repeated string topping_ids = 1;
+}
+
+message DecrementStockResponse { }
+
 
 message AvailableRequest { }
 

@@ -9,6 +9,7 @@ package toppings;
 service Toppings {
 
     rpc GetAvailable(AvailableRequest) returns (AvailableResponse);
+    rpc DecrementStock(DecrementStockRequest) returns (DecrementStockResponse);
 
 }
 
@@ -19,6 +20,12 @@ message AvailableResponse {
     repeated AvailableTopping toppings = 1;
 
 }
+
+message DecrementStockRequest {
+    repeated string topping_ids = 1;
+}
+
+message DecrementStockResponse { }
 
 message AvailableTopping {
 
