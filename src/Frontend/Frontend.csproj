@@ -12,4 +12,16 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="google.protobuf" Version="3.13.0" />
+    <PackageReference Include="grpc.aspnetcore.server.clientfactory" Version="2.31.0" />
+    <PackageReference Include="grpc.tools" Version="2.31.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Protobuf Include="Protos\decimal.proto" GrpcServices="None" />
+    <Protobuf Include="Protos\toppings.proto" GrpcServices="Client" ProtoRoot="Protos" />
+  </ItemGroup>
 </Project>

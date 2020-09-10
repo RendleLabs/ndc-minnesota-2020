@@ -25,6 +25,11 @@ namespace Frontend
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddGrpcClient<Toppings.ToppingsClient>((provider, options) =>
+            {
+                options.Address = new Uri("https://localhost:5003");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
