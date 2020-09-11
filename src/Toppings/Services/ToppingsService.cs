@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Grpc.Core;
+using Microsoft.AspNetCore.Authorization;
 using Toppings.Data;
 
 namespace Toppings
 {
+    [Authorize]
     public class ToppingsService : Toppings.ToppingsBase
     {
         private readonly IToppingData _data;

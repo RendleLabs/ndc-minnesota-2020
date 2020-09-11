@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Frontend.Models;
+using Grpc.Core;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 

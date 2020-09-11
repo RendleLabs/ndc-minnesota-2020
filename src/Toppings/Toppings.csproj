@@ -11,9 +11,11 @@
 
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.27.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Certificate" Version="3.1.8" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AuthHelp\AuthHelp.csproj" />
     <ProjectReference Include="..\Toppings.Data\Toppings.Data.csproj" />
   </ItemGroup>
 
