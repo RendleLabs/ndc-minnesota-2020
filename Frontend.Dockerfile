@@ -5,6 +5,7 @@ WORKDIR /src
 # copy csproj and restore as distinct layers
 COPY ./Pizza.sln .
 COPY ./src/Frontend/Frontend.csproj ./src/Frontend/
+COPY ./src/JaegerTracing/JaegerTracing.csproj ./src/JaegerTracing/
 COPY ./src/Orders/Orders.csproj ./src/Orders/
 COPY ./src/Orders.PubSub/Orders.PubSub.csproj ./src/Orders.PubSub/
 COPY ./src/Orders.ShopConsole/Orders.ShopConsole.csproj ./src/Orders.ShopConsole/

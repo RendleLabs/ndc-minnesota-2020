@@ -1,3 +1,4 @@
+using JaegerTracing;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -31,6 +32,8 @@ namespace Frontend
                 var config = provider.GetRequiredService<IConfiguration>();
                 options.Address = config.GetServiceUri("Orders");
             });
+
+            services.AddJaegerTracing();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
