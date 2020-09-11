@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders
+  namespace: pizza
+spec:
+  selector:
+    matchLabels:
+      run: orders
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: orders
+    spec:
+      containers:
+      - name: orders
+        image: pizza/orders:latest
+        imagePullPolicy: Never
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 80
+        env:
+        - name: DOTNET_SYSTEM_NET_HTTP_SOCKETSHTTPHANDLER_HTTP2UNENCRYPTEDSUPPORT
+          value: "true"
+        - name: Service__Toppings__Host
+          value: "toppings"
+        - name: Service__Toppings__Port
+          value: "80"
+        - name: Service__Toppings__Protocol
+          value: "http"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: orders
+  namespace: pizza
+spec:
+  ports:
+  - port: 80
+  selector:
+    run: orders
+    

@@ -21,7 +21,7 @@ namespace Orders
             services.AddGrpcClient<Toppings.ToppingsClient>((provider, options) =>
             {
                 var config = provider.GetRequiredService<IConfiguration>();
-                options.Address = config.GetServiceUri("Toppings", "https");
+                options.Address = config.GetServiceUri("Toppings");
             });
             services.AddOrderPubSub();
             services.AddGrpc();
