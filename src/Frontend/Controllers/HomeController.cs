@@ -24,7 +24,13 @@ namespace Frontend.Controllers
         [HttpGet("")]
         public async Task<IActionResult> Index()
         {
-            var available = await _toppingsClient.GetAvailableAsync(new AvailableRequest());
+            var response = _toppingsClient.GetAvailableAsync(new AvailableRequest());
+
+            var headers = await response.ResponseHeadersAsync;
+            var serviceIdHeader = headers.Get("service-id");
+            ViewData["ServiceId"] = serviceIdHeader?.Value;
+
+            var available = await response.ResponseAsync;
 
             var toppings = available.Toppings
                 .Select(t => new ToppingViewModel(t.Topping.Id, t.Topping.Name, t.Topping.Price))

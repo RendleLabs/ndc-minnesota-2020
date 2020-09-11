@@ -8,6 +8,7 @@ namespace Toppings
 {
     public class ToppingsService : Toppings.ToppingsBase
     {
+        private static readonly string ServiceId = Guid.NewGuid().ToString("d");
         private readonly IToppingData _data;
 
         public ToppingsService(IToppingData data)
@@ -27,6 +28,13 @@ namespace Toppings
             {
                 throw new RpcException(new Status(StatusCode.Internal, ex.Message));
             }
+
+            var headers = new Metadata
+            {
+                new Metadata.Entry("service-id", ServiceId)
+            };
+
+            await context.WriteResponseHeadersAsync(headers);
 
             var response = new AvailableResponse();
             foreach (var entity in toppings)

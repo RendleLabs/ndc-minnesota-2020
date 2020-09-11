@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       run: toppings
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -39,4 +39,3 @@ spec:
   - port: 80
   selector:
     run: toppings
-    
