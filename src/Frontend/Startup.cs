@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
+using AuthHelp;
 using Grpc.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,11 +37,19 @@ namespace Frontend
                     client.DefaultRequestVersion = new Version(2, 0);
                 }));
 
+            services.AddHttpClient("toppings")
+                .ConfigurePrimaryHttpMessageHandler(DevelopmentModeCertificateHelper.CreateClientHandler);
+
             services.AddGrpcClient<Toppings.ToppingsClient>((provider, options) =>
-            {
-                var config = provider.GetRequiredService<IConfiguration>();
-                options.Address = config.GetServiceUri("Toppings", "https");
-            });
+                {
+                    var config = provider.GetRequiredService<IConfiguration>();
+                    options.Address = config.GetServiceUri("Toppings", "https");
+                })
+                .ConfigureChannel(((provider, channel) =>
+                {
+                    channel.HttpClient = provider.GetRequiredService<IHttpClientFactory>().CreateClient("toppings");
+                    channel.DisposeHttpClient = true;
+                }));
 
             services.AddGrpcClient<Orders.OrdersClient>((provider, options) =>
                 {
