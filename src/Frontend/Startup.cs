@@ -45,11 +45,11 @@ namespace Frontend
                     var config = provider.GetRequiredService<IConfiguration>();
                     options.Address = config.GetServiceUri("Toppings", "https");
                 })
-                .ConfigureChannel(((provider, channel) =>
+                .ConfigureChannel((provider, channel) =>
                 {
                     channel.HttpClient = provider.GetRequiredService<IHttpClientFactory>().CreateClient("toppings");
                     channel.DisposeHttpClient = true;
-                }));
+                });
 
             services.AddGrpcClient<Orders.OrdersClient>((provider, options) =>
                 {
